@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoverView Settings</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <div class="logo-area">
+        <div class="logo-circle">HV</div>
+        <div class="title-meta">
+          <h1>HoverView</h1>
+          <span class="version">v1.0.0</span>
+        </div>
+      </div>
+      <p class="tagline">Hover preview settings</p>
+    </header>
+
+    <main class="popup-content">
+      <!-- Toggle Extension -->
+      <div class="control-row toggle-row">
+        <label for="enabled-toggle" class="label-primary">Enable HoverView</label>
+        <label class="switch">
+          <input type="checkbox" id="enabled-toggle" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <hr class="divider">
+
+      <!-- Hover Delay Slider -->
+      <div class="control-col">
+        <div class="label-val-row">
+          <label for="delay-slider" class="label-primary">Hover Delay</label>
+          <span id="delay-val" class="badge-value">320ms</span>
+        </div>
+        <input type="range" id="delay-slider" min="100" max="1000" step="20" value="320" class="range-input">
+      </div>
+
+      <!-- Video Duration Slider -->
+      <div class="control-col">
+        <div class="label-val-row">
+          <label for="duration-slider" class="label-primary">Max Video Playback</label>
+          <span id="duration-val" class="badge-value">10s</span>
+        </div>
+        <input type="range" id="duration-slider" min="5" max="30" step="1" value="10" class="range-input">
+      </div>
+
+      <!-- Mute Video Previews Switch -->
+      <div class="control-row">
+        <label for="mute-toggle" class="label-primary">Mute Video Previews</label>
+        <label class="switch">
+          <input type="checkbox" id="mute-toggle" checked>
+          <span class="slider round"></span>
+        </label>
+      </div>
+
+      <!-- Activation Key Selection -->
+      <div class="control-col">
+        <label for="trigger-select" class="label-primary">Trigger Activation Key</label>
+        <div class="select-wrapper">
+          <select id="trigger-select" class="select-input">
+            <option value="None">None (Instant Hover)</option>
+            <option value="Shift">Hold Shift to Show</option>
+            <option value="Ctrl">Hold Ctrl to Show</option>
+            <option value="Alt">Hold Alt to Show</option>
+            <option value="ShiftMute">Show unless Shift is held</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Domain Blocklist -->
+      <div class="control-col">
+        <label for="blocklist-textarea" class="label-primary">Domain Blocklist</label>
+        <span class="label-secondary">One domain per line (e.g. reddit.com)</span>
+        <textarea id="blocklist-textarea" rows="3" placeholder="example.com&#10;anotherdomain.org" class="textarea-input"></textarea>
+      </div>
+    </main>
+
+    <footer class="popup-footer">
+      <div id="status-message" class="status-message">Settings saved</div>
+      <div class="footer-links">
+        <span>HoverView Extension</span>
+      </div>
+    </footer>
+  </div>
+  <script src="popup.js"></script>
+</body>
+</html>
