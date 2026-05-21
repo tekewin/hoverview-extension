@@ -6,7 +6,12 @@
 (function () {
   'use strict';
 
+  // Attribute used as a cross-world singleton lock (see below).
+  const HV_MARKER = 'data-hoverview-active';
+
   // ─── Duplicate/Orphan Prevention ──────────────────────────────────────────
+
+  // Same-world re-injection: tear down the previous instance of THIS script.
   if (window.__hoverview_cleanup__) {
     try {
       window.__hoverview_cleanup__();
@@ -14,6 +19,15 @@
       console.warn('HoverView: Cleanup of previous instance failed:', e);
     }
   }
+
+  // Cross-world guard: content scripts from separate extension installs run in
+  // isolated JS worlds and cannot see each other's `window`, but they DO share
+  // the DOM. A marker attribute on <html> guarantees only one HoverView
+  // instance is ever active, even if the extension is loaded more than once.
+  if (document.documentElement.hasAttribute(HV_MARKER)) {
+    return;
+  }
+  document.documentElement.setAttribute(HV_MARKER, '1');
 
   // ─── Constants ────────────────────────────────────────────────────────────
 
@@ -64,6 +78,11 @@
   }
 
   function cleanupOrphan() {
+    // Release the cross-world singleton lock so a fresh instance can take over.
+    try {
+      document.documentElement.removeAttribute(HV_MARKER);
+    } catch (e) {}
+
     try {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseover', handleMouseOver);
@@ -430,13 +449,14 @@
   // ─── Image preview ────────────────────────────────────────────────────────
 
   function showImage(url, fallbackUrl = null) {
+    const expectedTarget = activeTarget;
     showSpinner();
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
 
     img.onload = function () {
-      if (!activeTarget) return;  // user already moved away
+      if (activeTarget !== expectedTarget) return;  // user moved to a different target
 
       // Compute constrained display size — skip if too small to be useful
       const size = computeMediaSize(img.naturalWidth, img.naturalHeight);
@@ -470,8 +490,8 @@
     };
 
     img.onerror = function () {
+      if (activeTarget !== expectedTarget) return;
       if (fallbackUrl) {
-        // Fallback (e.g. YouTube lower resolution thumbnail)
         showImage(fallbackUrl);
       } else {
         hideSpinner();
@@ -485,6 +505,7 @@
   // ─── Video preview ────────────────────────────────────────────────────────
 
   function showVideo(url) {
+    const expectedTarget = activeTarget;
     showSpinner();
 
     const ol = ensureOverlay();
@@ -515,7 +536,7 @@
     ol.appendChild(vid);
 
     vid.addEventListener('loadedmetadata', function () {
-      if (!activeTarget) return;
+      if (activeTarget !== expectedTarget) return;
 
       // Use video's intrinsic dimensions; fall back to a 16:9 default
       const natW = vid.videoWidth  || 640;
@@ -555,6 +576,7 @@
     });
 
     vid.addEventListener('error', function () {
+      if (activeTarget !== expectedTarget) return;
       hideSpinner();
       showError('Video failed to load', url);
     });

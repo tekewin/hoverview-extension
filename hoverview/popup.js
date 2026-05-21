@@ -9,8 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
   const triggerSelect = document.getElementById('trigger-select');
   const blocklistTextarea = document.getElementById('blocklist-textarea');
   const statusMessage = document.getElementById('status-message');
+  const versionLabel = document.getElementById('version-label');
 
   let statusTimeout = null;
+
+  // Display the version straight from the manifest so it never drifts.
+  if (versionLabel) {
+    versionLabel.textContent = 'v' + chrome.runtime.getManifest().version;
+  }
 
   /**
    * Display visual saving confirmation badge.
