@@ -13,3 +13,12 @@ desktop.ini
 *.crx
 *.pem
 *.zip
+
+# Testing — generated at runtime, never committed
+node_modules/
+.playwright-profile/
+test-results/
+playwright-report/
+
+# Local tooling
+.claude/

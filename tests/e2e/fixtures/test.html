@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HoverView E2E Test Fixture</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 20px;
+      margin: 0;
+      height: 100vh;
+      overflow: hidden; /* Prevent ALL scrolling */
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+    a { color: #7c9ff7; }
+    h2 { margin: 0 0 10px 0; font-size: 16px; }
+    .item { background: #222; padding: 15px; border-radius: 6px; }
+  </style>
+</head>
+<body>
+  <h1>HoverView E2E</h1>
+
+  <div class="grid">
+    <div class="item">
+      <h2>Image link (SVG, 200×150)</h2>
+      <a id="image-link" href="http://localhost:7777/sample.svg">Hover me – image link</a>
+    </div>
+
+    <div class="item">
+      <h2>Second image link</h2>
+      <a id="svg-link" href="http://localhost:7777/sample.svg">Hover me – SVG link</a>
+    </div>
+
+    <div class="item">
+      <h2>Video link</h2>
+      <a id="video-link" href="http://localhost:7777/sample.mp4">Hover me – video link</a>
+    </div>
+
+    <div class="item">
+      <h2>YouTube link</h2>
+      <a id="youtube-link" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Hover me – YouTube link</a>
+    </div>
+
+    <div class="item">
+      <h2>Plain link (no preview)</h2>
+      <a id="plain-link" href="https://example.com/page.html">Hover me – plain HTML link</a>
+    </div>
+
+    <div class="item">
+      <h2>Inline image element</h2>
+      <img id="inline-img" src="http://localhost:7777/sample.svg" width="100" height="75" alt="inline image">
+    </div>
+  </div>
+
+  <!-- Safe zone: hover here to dismiss the overlay -->
+  <div id="safe-zone" style="position: fixed; bottom: 20px; right: 20px; width: 200px; padding:20px; background:#1e2030; border-radius:8px; z-index: 9999;">
+    Safe zone — hover to dismiss
+  </div>
+</body>
+</html>

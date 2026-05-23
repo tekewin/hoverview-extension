@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150">
+  <rect width="200" height="150" fill="#4f46e5"/>
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
+        fill="white" font-size="20" font-family="sans-serif">Test Image</text>
+</svg>
