@@ -453,7 +453,6 @@
     showSpinner();
 
     const img = new Image();
-    img.crossOrigin = 'anonymous';
 
     img.onload = function () {
       if (activeTarget !== expectedTarget) return;  // user moved to a different target
