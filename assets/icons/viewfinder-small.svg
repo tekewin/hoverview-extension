@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!--
+    HoverView — "Viewfinder", small-size variant.
+    Rendered to icon16.png and icon32.png.
+
+    Hinted for small rasters: the sun and mountain are dropped (they land
+    under 1px and turn to noise) and the brackets are thickened so they
+    survive the reduction. Identical geometry to the master otherwise.
+  -->
+  <g fill="none" stroke="#1FB3D3" stroke-width="13" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 43 V25 a11 11 0 0 1 11 -11 H43"/>
+    <path d="M85 14 H103 a11 11 0 0 1 11 11 V43"/>
+    <path d="M114 85 V103 a11 11 0 0 1 -11 11 H85"/>
+    <path d="M43 114 H25 a11 11 0 0 1 -11 -11 V85"/>
+  </g>
+
+  <rect x="36" y="39" width="56" height="50" rx="11" fill="#2A6FDE"/>
+</svg>

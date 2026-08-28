@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <!--
+    HoverView — "Viewfinder"
+    Full-detail master. Rendered to icon48.png and icon128.png.
+    Corner brackets frame a photo: focusing on media.
+  -->
+  <defs>
+    <linearGradient id="photo" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%"   stop-color="#3182E6"/>
+      <stop offset="100%" stop-color="#1550BE"/>
+    </linearGradient>
+    <clipPath id="frame">
+      <rect x="38" y="41" width="52" height="46" rx="10"/>
+    </clipPath>
+  </defs>
+
+  <!-- viewfinder brackets -->
+  <g fill="none" stroke="#1FB3D3" stroke-width="11" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M14 43 V25 a11 11 0 0 1 11 -11 H43"/>
+    <path d="M85 14 H103 a11 11 0 0 1 11 11 V43"/>
+    <path d="M114 85 V103 a11 11 0 0 1 -11 11 H85"/>
+    <path d="M43 114 H25 a11 11 0 0 1 -11 -11 V85"/>
+  </g>
+
+  <!-- photo -->
+  <rect x="38" y="41" width="52" height="46" rx="10" fill="url(#photo)"/>
+  <g clip-path="url(#frame)">
+    <circle cx="52" cy="55" r="5" fill="#ffffff"/>
+    <path d="M43 79 L58 61 L70 74 L78 66 L89 79" fill="none" stroke="#ffffff"
+          stroke-width="6.5" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>
